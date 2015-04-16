@@ -112,8 +112,10 @@ module.exports = (env) ->
     currentAmperage: 0.0
 
     constructor: (@config, @plugin) ->
-      @on 'meteringData', ((values) ->
+      @on 'meteringData', ((values) =>
         @emit "energyToday", values.day
+        @energyToday = values.day
+        # do this for all attributes...
         @emit "energyWeek", values.week
         @emit "energyMonth", values.month
         @emit "currentPower", values.nowPower
